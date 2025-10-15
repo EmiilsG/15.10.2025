@@ -1,9 +1,10 @@
-<form action="/products" method="post">
+<form action="{{ route('products.store') }}" method="POST">
     @csrf
-    <input type="text" name="name">
-    <input type="number" name="quantity">
+
+    <input type="text" name="name" value="{{ old('name') }}">
+    <input type="number" name="quantity"  value="{{ old('quantity') }}">
     <textarea name="description"></textarea>
     <input type="submit" value="Submit">
 </form>
 
-<a href="/products">Back to product list</a>
+<a href="{{ route('products.index') }}">Back to product list</a>

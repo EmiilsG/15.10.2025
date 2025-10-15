@@ -9,50 +9,38 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::all();
-        return view('products.index', ['allProducts' => $products]);
+        return view('products.index', compact ('products'));
     }
 
-    public function create() {
-        return view('products.create');
-    }
+   public function create() {
+    return view('products.create');
+}
 
-    public function store(Request $request) {
-        $data = [
-            'name' => $request->name,
-            'quantity' => $request->quantity,
-            'description' => $request->description,
-        ];
+public function store(Request $request) {
+    $data = $request->only('name', 'quantity', 'description');
+    $product = Product::create($data);
+    return redirect()->route('products.show', $product);
+}
 
-        $product = Product::create($data);
-        return redirect('/products/' . $product->id . '/show');
-    }
+    public function show(Product $product) {
+    return view('products.show', compact('product'));
+}
 
-    public function show($id) {
-        $product = Product::find($id);
-        return view('products.show', ['singleProduct' => $product]);
-    }
 
-    public function destroy($id) {
-        $product = Product::find($id);
+    public function destroy(Product $product) {
         $product->delete();
         return redirect('/products/');
     }
 
-    public function edit($id) {
-        $product = Product::find($id);
-        return view('products.edit', ['singleProduct' => $product]);
+    public function edit(Product $product) {
+        return view('products.edit', ['product' => $product]);
     }
 
-    public function update(Request $request, $id) {
-        $product = Product::find($id);
+   public function update(Request $request, Product $product) {
+    $data = $request->only('name', 'quantity', 'description');
+    $product->update($data);
 
-        $data = [
-            'name' => $request->name,
-            'quantity' => $request->quantity,
-            'description' => $request->description,
-        ];
+    return redirect()->route('products.show', $product);
+}
 
-        $product->update($data);
-        return redirect('/products/' . $product->id . '/show');
-    }
 }
