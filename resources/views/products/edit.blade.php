@@ -1,12 +1,54 @@
-<form action="{{ route('products.update', $product) }}" method="POST">
-    @csrf
-    @method('PUT')
+<x-layout title="Edit Product">
+    @if ($errors->any())
+        <div class="alert-error">
+            <strong>Kļūda!</strong> Lūdzu, izlabo sekojošās kļūdas:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-    <input type="text" name="name" value="{{ $product->name }}">
-    <input type="number" name="quantity" value="{{ $product->quantity }}">
-    <textarea name="description">{{ $product->description }}</textarea>
+    <form action="{{ route('products.update', $product) }}" method="POST" class="form-container">
+        @csrf
+        @method('PUT')
 
-    <input type="submit" value="Update">
-</form>
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                value="{{ old('name', $product->name) }}"
+                required
+            >
+        </div>
 
-<a href="{{ route('products.index') }}">Back to product list</a>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                value="{{ old('quantity', $product->quantity) }}"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+                name="description"
+                id="description"
+                rows="5"
+                required
+            >{{ old('description', $product->description) }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" class="button" value="Update">
+            <a class="button secondary" href="{{ route('products.index') }}">Back to product list</a>
+        </div>
+    </form>
+</x-layout>

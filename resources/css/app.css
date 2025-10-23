@@ -1,11 +1,268 @@
-@import 'tailwindcss';
+/* Reset / base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Layout */
+.site-header,
+.site-footer {
+  background-color: #fff;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.site-footer {
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+}
+
+/* Navigation */
+/* Navigation */
+nav {
+  background: #333;
+  color: white;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 20px; /* <-- šeit veidojas atstarpe starp saitēm */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* Alerts */
+.alert-success {
+  background-color: #e6ffed;
+  color: #276749;
+  padding: 1rem;
+  border-left: 4px solid #38a169;
+  margin: 1rem 0;
+}
+
+.alert-error {
+  background-color: #ffe6e6;
+  color: #990000;
+  border-left: 4px solid #cc0000;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  border-radius: 4px;
+}
+
+/* Main Content padding */
+.main-content.container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Product List */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-card h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.product-card p {
+  color: #555;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+/* Buttons & links */
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: #005fa3;
+}
+
+.button.secondary {
+  background-color: #666;
+}
+
+.button.secondary:hover {
+  background-color: #444;
+}
+
+/* Actions container inside product cards */
+.product-card .actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Delete button */
+.product-card form input[type="submit"] {
+  background: #cc0000;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.product-card form input[type="submit"]:hover {
+  background: #990000;
+}
+
+/* Create new product button */
+.create-new-product {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.6rem 1.2rem;
+  background: #0077cc;
+  color: white;
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.create-new-product:hover {
+  background: #005fa3;
+}
+
+/* Form Layout */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.form-actions .button {
+  padding: 0.5rem 1rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  nav {
+    justify-content: center;
+  }
+
+  nav a {
+    margin: 0;
+  }
+
+  .product-card {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card .actions a,
+  .product-card .actions form input[type="submit"] {
+    width: 100%;
+    margin: 0;
+  }
 }

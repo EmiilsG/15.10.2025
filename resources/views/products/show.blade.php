@@ -1,5 +1,9 @@
-<h1>{{ $product->name }}</h1>
-<p>Quantity: {{ $product->quantity }}</p>
-<p>{{ $product->description }}</p>
+<x-layout title="{{ $product->name }}">
+    <div class="product-card">
+        <h2>{{ $product->name }}</h2>
+        <p>Quantity: {{ $product->quantity }}</p>
+        <p>{{ $product->description }}</p>
 
-<a href="{{ route('products.index') }}">Back to all products</a>
+        <a class="button" href="{{ route('products.index') }}">Back to all products</a>
+    </div>
+</x-layout>

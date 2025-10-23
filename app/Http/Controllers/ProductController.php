@@ -16,11 +16,17 @@ class ProductController extends Controller
     return view('products.create');
 }
 
-public function store(Request $request) {
-    $data = $request->only('name', 'quantity', 'description');
-    $product = Product::create($data);
-    return redirect()->route('products.show', $product);
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'quantity' => 'required|integer|min:1',
+        'description' => 'nullable|string',
+    ]);
+    $product = Product::create($validated);
+    return redirect()->route('products.show', $product)->with('success', 'Produkts veiksmīgi izveidots!');
 }
+
 
     public function show(Product $product) {
     return view('products.show', compact('product'));

@@ -1,19 +1,23 @@
 <x-layout title="Produktu saraksts">
-    <ul>
+    <div class="product-list">
         @foreach ($products as $product)
-            <li>
-                <h1>{{ $product->name }}</h1>
+            <div class="product-card">
+                <h2>{{ $product->name }}</h2>
                 <p>{{ $product->description }}</p>
-                <a href="{{ route('products.show', $product) }}">Show</a>
-                <a href="{{ route('products.edit', $product) }}">Edit</a>
+
+                <a class="button" href="{{ route('products.show', $product) }}">Show</a>
+                <a class="button" href="{{ route('products.edit', $product) }}">Edit</a>
+
                 <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" value="Delete" />
+                    <input class="button" type="submit" value="Delete" />
                 </form>
-            </li>
+            </div>
         @endforeach
-    </ul>
+    </div>
 
-    <a href="{{ route('products.create') }}">Create new product</a>
+    <div style="margin-top: 2rem;">
+    
+    </div>
 </x-layout>
