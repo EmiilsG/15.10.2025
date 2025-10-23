@@ -3,6 +3,5 @@
 
   <ul class="status-list">
     <li class="status online"> Sistēma darbojas normāli</li>
-    <li class="status error"> Savienojuma kļūda</li>
   </ul>
 </aside>
