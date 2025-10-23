@@ -11,6 +11,87 @@ body {
   color: #333;
   line-height: 1.6;
 }
+.item-a {
+  grid-area: header;
+}
+.item-b {
+  grid-area: main;
+}
+.item-c {
+  grid-area: sidebar;
+}
+.item-d {
+  grid-area: footer;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+}
+
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.status {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+}
+
+/* Statusu krāsas */
+.status.online {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+/* Galvenais saturs */
+.main-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Responsīvais izkārtojums */
+@media (max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+}
+
+
+
+
 
 a {
   color: #0077cc;
@@ -265,4 +346,39 @@ nav a:hover {
     width: 100%;
     margin: 0;
   }
+
+    .item-a {
+      grid-area: 4 / col4-start / last-line / 6;
+    }
+    .item-b {
+      grid-column-start: 6;
+      grid-column-end: span col4-start;
+      grid-row-start: 2;
+      grid-row-end: span 2;
+    }
+    .item- {
+        grid-area: 1 / col4-start / last-line / 6;
+    }
+    .item-d {
+      grid-column: 7 / span 3;
+      grid-row: first-line / 4;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 30px 30px 30px 30px;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "header header header header"
+        "main main . sidebar"
+        "footer footer footer footer";
+      gap: 10px;
+    }
+
+    .container > div {
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
 }

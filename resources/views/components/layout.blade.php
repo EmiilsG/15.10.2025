@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ $title ?? 'My App' }}</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+@include('components.sidebar')
+<aside class="sidebar">
 
-  <header class="site-header">
-    <div class="container">
+</aside>
+
+  <div class="container">
+
+    <header class="item-a site-header">
       <h1>{{ $title ?? 'Produktu saraksts' }}</h1>
-    </div>
-  </header>
+    </header>
 
-  @include('components.navigation')
+    @include('components.navigation')
 
-  @if (session('success'))
-    <div class="alert-success container">
-      {{ session('success') }}
-    </div>
-  @endif
+    <main class="item-b main-content">
+      {{ $slot }}
+    </main>
 
-  <main class="main-content container">
-    {{ $slot }}
-  </main>
 
-  <footer class="site-footer">
-    <div class="container">
+
+    <footer class="item-d site-footer">
       &copy; {{ date('Y') }} My App
-    </div>
-  </footer>
+    </footer>
+
+  </div>
 
 </body>
 </html>
